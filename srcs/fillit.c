@@ -6,7 +6,7 @@
 /*   By: rzarate <rzarate@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 02:48:46 by rzarate           #+#    #+#             */
-/*   Updated: 2018/02/23 04:36:22 by rzarate          ###   ########.fr       */
+/*   Updated: 2018/02/23 09:36:10 by rzarate          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,9 @@
 
 void	fillit(char	*s)
 {
-	if (!check_input(s))
-	{
-		ft_putendl_fd("Invalid parameter passed breihhhh", 2);
-		return ;
-	}
-	else
-		ft_putendl("GOOD TO GO");
+	char	**p;
+
+	p = NULL;
+	p = parse_tets(s);
+	ft_putstr(p[8]);
 }

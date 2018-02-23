@@ -6,7 +6,7 @@
 /*   By: rzarate <rzarate@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 01:48:59 by rzarate           #+#    #+#             */
-/*   Updated: 2018/02/23 04:51:56 by rzarate          ###   ########.fr       */
+/*   Updated: 2018/02/23 09:00:23 by rzarate          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,23 +20,8 @@
 #include <sys/types.h>
 #include <sys/uio.h>
 
-typedef struct	s_list
-{
-	char			*l1;
-	char			*l2;
-	char			*l3;
-	char			*l4;
-	struct	s_list	*next;
-}				raw_list;
-
-typedef struct	s_list
-{
-	int				type;
-	int				orientation;
-	struct	s_list	*next;
-}				tet_list;
-
 void			fillit(char	*s);
 int				check_input(char *s);
+char	**parse_tets(char *s);
 
 #endif

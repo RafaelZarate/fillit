@@ -6,7 +6,7 @@
 /*   By: rzarate <rzarate@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 01:16:09 by rzarate           #+#    #+#             */
-/*   Updated: 2018/02/23 04:34:58 by rzarate          ###   ########.fr       */
+/*   Updated: 2018/02/23 06:10:31 by rzarate          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int	main(int ac,char  **av)
 		ret = read(fd, buf, BUF_SIZE);
 		buf[ret] = '\0';
 		ft_putendl(buf);
+		ft_putendl("\n\n\n");
 		fillit(buf);
 		if (close(fd) == -1)
 		{

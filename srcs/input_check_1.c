@@ -6,7 +6,7 @@
 /*   By: rzarate <rzarate@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 03:55:46 by rzarate           #+#    #+#             */
-/*   Updated: 2018/02/23 04:41:28 by rzarate          ###   ########.fr       */
+/*   Updated: 2018/02/23 06:06:27 by rzarate          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,18 @@ static	int	check_chars(char *s)
 	return (1);
 }
 
-static	int	check_length(size_t l)
-{
-	if (l < 19)
-		return (0);
-	if (l % 19 != 0 && l % 20 != 0)
-		return (0);
-	return (1);
-}
+// static	int	check_nl(char *s, size_t l)
+// {
+// 	int i;
+
+// 	i = 1;
+// 	while (s[i])
+// 	{
+// 		if (i % 4 == 0 && s[i] !=)
+		
+// 		i++;		
+// 	}
+//}
 
 int	check_input(char *s)
 {
@@ -45,7 +49,7 @@ int	check_input(char *s)
 		return (-1);
 	len = ft_strlen(s);
 	ft_putendl(ft_itoa(len));
-	if (!check_chars(s) || !check_length(len))
+	if (!check_chars(s))
 		return (0);
 	else
 		return (1);
