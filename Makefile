@@ -1,15 +1,14 @@
 
 NAME = fillit
 
-SRC = main.c
+SRC = main.c \
+		fillit.c
 
 OBJ = $(SRC:.c=.o)
 
-SRC_PATH = src/
+SRC_PATH = srcs/
 
 SRC_POS = $(addprefix $(SRC_PATH), $(SRC))
-
-MAIN = srcs/main.c
 
 FLAGS = -Wall -Werror -Wextra
 
@@ -28,8 +27,10 @@ $(LIBFT):
 
 clean:
 				rm -f $(OBJ)
+					make clean -C ./srcs/libft
 
 fclean: clean
 				rm -f $(NAME)
+					make fclean -C ./srcs/libft
 
 re: fclean all
