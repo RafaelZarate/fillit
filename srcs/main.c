@@ -6,7 +6,7 @@
 /*   By: rzarate <rzarate@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 01:16:09 by rzarate           #+#    #+#             */
-/*   Updated: 2018/02/23 02:50:46 by rzarate          ###   ########.fr       */
+/*   Updated: 2018/02/23 03:35:37 by rzarate          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,17 @@ int	main(int ac,char  **av)
 	{
 		ft_putstr_fd(2, "you dumb piece of shittttt");
 	}
-	else if (ac == 1)
+	else if (ac == 2)
 	{
-		fd = open(av[0], O_RDONLY);
+		fd = open(av[1], O_RDONLY);
 		if (fd == -1)
 		{
 			ft_putstr_fd(2, "Couldn't open file");
 			return (0);
 		}
 		ret = read(fd, buf, BUF_SIZE);
-		ret = '\0';
+		buf[ret] = '\0';
+		ft_putstr(buf);
 		fillit(ret);
 		if (close(fd) == -1)
 		{
