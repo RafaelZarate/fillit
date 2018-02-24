@@ -6,7 +6,7 @@
 /*   By: rzarate <rzarate@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 01:48:59 by rzarate           #+#    #+#             */
-/*   Updated: 2018/02/24 04:57:40 by rzarate          ###   ########.fr       */
+/*   Updated: 2018/02/24 12:51:34 by rzarate          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,6 @@ int			*make_tets(int	**at);
 int			**parse_tets(char *s);
 int			count_tets(char *s);
 void		solve_tetrimino(int	**p);
+int *parse_tetriminos(char *s);
 
 #endif

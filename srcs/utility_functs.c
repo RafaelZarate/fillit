@@ -1,37 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fillit.c                                           :+:      :+:    :+:   */
+/*   utility_functs.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rzarate <rzarate@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/02/23 02:48:46 by rzarate           #+#    #+#             */
-/*   Updated: 2018/02/24 12:51:17 by rzarate          ###   ########.fr       */
+/*   Created: 2018/02/24 11:56:33 by rzarate           #+#    #+#             */
+/*   Updated: 2018/02/24 12:44:12 by rzarate          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fillit.h"
 
-void	fillit(char	*s)
+int		count_tets(char *s)
 {
-	int	*p;
-	int n;
 	int i;
+	int c;
 
-	i = -1;
-	n = check_input(s);
-	if (n == -1)
+	i = ft_strlen(s) - 1;
+	c = 1;
+	while (--i > 0)
 	{
-		ft_putendl_fd("File is blank", 2);
-		return ;
+		if (s[i] == '\n' && s[i - 1] == '\n')
+			c++;
 	}
-	else if (n == 0)
-	{
-		ft_putendl_fd("Usage text goes here", 2);
-		return ;
-	}
-	p = parse_tetriminos(s);
-	while (++i < count_tets(s))
-		printf("%d\n", p[i]);
-	return ;	
+	return (c);
 }
+
+// int	access_values(int *ar, int i)
+// {
+
+// }

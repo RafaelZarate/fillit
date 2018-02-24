@@ -6,7 +6,7 @@
 /*   By: rzarate <rzarate@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 03:55:46 by rzarate           #+#    #+#             */
-/*   Updated: 2018/02/24 07:41:51 by rzarate          ###   ########.fr       */
+/*   Updated: 2018/02/24 11:58:44 by rzarate          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,41 +70,6 @@ static	int	check_chars(char *s)
 	return (1);
 }
 
-int	check_form(int	*p, int i, int c)
-{
-	printf("%i\t%i\t%i\t%i\n", p[i], p[i + 1], i, c);
-	if (c == 3)
-		return (1);
-	if (i > 19)
-		return (0);
-	if (i > 6)
-	{
-		if (p[i - 1] == 1 && p[i - 2] == 1 && c == 2)
-			return (1);
-	}
-	if (i < 14)
-	{
-		if (p[i + 1] == 1 && p[i + 4] == 1 && p[i + 5] == 1)
-			return (1);
-	}
-	if (i > 5)
-	{
-		if (p[i - 1] == 1)
-			c++;
-	}
-	// if (i < 19)
-	//  {
-		if (i < 19 && p[i + 1] == 1)
-			check_form(p, i + 1, c + 1);
-	//}
-	if (i < 15)
-	{
-		if (p[i + 4] == 1)
-			check_form(p, i + 4, c + 1);
-	}
-	return (0);
-}
-
 int	check_input(char *s)
 {
 	size_t	i;
@@ -116,11 +81,8 @@ int	check_input(char *s)
 	else if (check_chars(s) && check_nl(s))
 	{
 		a = parse_tets(s);
-		if (check_pounds(a, s))
-		{
-			printf("%d", check_form(a[15], 0, 0));
-		}
-			
+		if (!check_pounds(a, s))
+			return (0);
 	}
 	return (1);
 }
