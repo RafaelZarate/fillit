@@ -3,8 +3,9 @@ NAME = fillit
 
 SRC = main.c \
 		fillit.c \
-		input_check_1.c \
-		input_parse_1.c
+		validate_input.c \
+		parse_input.c \
+		solve.c \
 
 OBJ = $(SRC:.c=.o)
 
