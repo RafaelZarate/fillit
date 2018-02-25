@@ -6,7 +6,7 @@
 /*   By: rzarate <rzarate@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 01:16:09 by rzarate           #+#    #+#             */
-/*   Updated: 2018/02/24 00:07:17 by rzarate          ###   ########.fr       */
+/*   Updated: 2018/02/25 13:29:26 by rzarate          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int	main(int ac,char  **av)
 	int	ret;
 	char	buf[BUF_SIZE + 1];
 
+	av++;
 	if (ac == 1 || ac > 2)
 	{
 		ft_putendl_fd("you dumb piece of shittttt\n", 2);
@@ -25,7 +26,7 @@ int	main(int ac,char  **av)
 	}
 	else if (ac == 2)
 	{
-		fd = open(av[1], O_RDONLY);
+		fd = open("test.txt", O_RDONLY);
 		if (fd == -1)
 		{
 			ft_putendl_fd("Couldn't open file\n", 2);

@@ -6,7 +6,7 @@
 /*   By: rzarate <rzarate@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/24 01:12:55 by rzarate           #+#    #+#             */
-/*   Updated: 2018/02/25 12:46:12 by rzarate          ###   ########.fr       */
+/*   Updated: 2018/02/25 14:22:41 by rzarate          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,8 @@ int	values[20][3] = {{0, 0, 0}, {1, 2, 3}, {4, 8, 12}, {1, 4, 5}, {3, 4, 5}, \
 
 static	void	solve(int *p, int win, int c, int i, int l, char *s)
 {
-	char	*arr;
+	char	*s2;
+	char	*s3;
 	int x;
 	
 	printf("%d", c);
@@ -68,21 +69,20 @@ static	void	solve(int *p, int win, int c, int i, int l, char *s)
 		printf("Daaaaaamn boiiiii");
 		return ;
 	}
-	arr = s;
-	s = ft_strnew(l * l);
-	if (arr[0])
-		arr = ft_strcpy(s, arr);
+	s2 = s;
+	s3 = ft_strnew(l * l);
+	s3 = ft_strcpy(s3, s2);
 	while (++x < (l * l) + 1)
-		arr[x] = '.';
+		s[x] = '.';
+	x = -1;
 	while (++x < ((l * l) - values[p[i]][2]))
 	{
-		if (arr[x] == '.' && arr[x + values[p[i]][0] + (l - 2)] == '.' && arr[x + values[p[i]][1] + (l - 2)] == '.' && arr[x + values[p[i]][2] + (l - 2)] == '.')
+		if (s[x] == '.' && s[x + values[p[i]][0] + (l - 2)] == '.' && s[x + values[p[i]][1] + (l - 2)] == '.' && s[x + values[p[i]][2] + (l - 2)] == '.')
 		{
-			arr[x] = '#';
-			arr[x + values[p[i]][0] + (l - 2)] = '#';
-			arr[x + values[p[i]][1] + (l - 2)] = '#';
-			arr[x + values[p[i]][2] + (l - 2)] = '#';
-			printf("%d", c);
+			s[x] = '#';
+			s[x + values[p[i]][0] + (l - 2)] = '#';
+			s[x + values[p[i]][1] + (l - 2)] = '#';
+			s[x + values[p[i]][2] + (l - 2)] = '#';
 			solve(p, win, ++c, ++i, l, s);
 		}
 	}

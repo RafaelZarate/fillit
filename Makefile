@@ -14,7 +14,7 @@ SRC_PATH = srcs/
 
 SRC_POS = $(addprefix $(SRC_PATH), $(SRC))
 
-FLAGS = -Wall -Werror -Wextra
+FLAGS = -Wall -Werror -Wextra -g
 
 LIBFT = srcs/libft/libft.a
 
