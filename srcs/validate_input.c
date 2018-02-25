@@ -6,11 +6,13 @@
 /*   By: rzarate <rzarate@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 03:55:46 by rzarate           #+#    #+#             */
-/*   Updated: 2018/02/24 11:58:44 by rzarate          ###   ########.fr       */
+/*   Updated: 2018/02/25 03:48:56 by rzarate          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fillit.h"
+
+// extern int g_o[3][19]
 
 static	int	check_pounds(int **p, char	*s)
 {

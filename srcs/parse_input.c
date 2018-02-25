@@ -6,12 +6,11 @@
 /*   By: rzarate <rzarate@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 05:24:40 by rzarate           #+#    #+#             */
-/*   Updated: 2018/02/24 12:55:18 by rzarate          ###   ########.fr       */
+/*   Updated: 2018/02/25 03:55:53 by rzarate          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fillit.h"
-
 
 static	int	set_tet_1(int	*p, int i)
 {
@@ -66,21 +65,20 @@ static	int	*create_tets(int **aa, int n)
 	while (++x < n)
 	{
 		y = -1;
-		while (++y > 16)
+		while (++y < 16)
 		{
 			if (aa[x][y] == 1)
 			{
 				a[i] = set_tet_1(aa[x], y);
 				if (!a[i])
 					a[i] = set_tet_2(aa[x], y);
+				printf("%d\n", a[i]);
 				if (!a[i])
 					return (NULL);
 				i++;
 				break ;
 			}
 		}
-		if (!a[i])
-			return (NULL);
 	}
 	return (a);
 }
