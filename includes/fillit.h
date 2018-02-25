@@ -6,7 +6,7 @@
 /*   By: rzarate <rzarate@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 01:48:59 by rzarate           #+#    #+#             */
-/*   Updated: 2018/02/24 12:51:34 by rzarate          ###   ########.fr       */
+/*   Updated: 2018/02/25 09:25:52 by rzarate          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,25 @@
 #include <sys/types.h>
 #include <sys/uio.h>
 
+typedef	struct	s_tetri
+{
+	int	coords[3];
+	int	max;
+	int	tet;
+}				*t_tetri;
+
+typedef	struct	s_map
+{
+	char		**area;
+	int			size;
+}				*t_map;
+
 void			fillit(char	*s);
 int				check_input(char *s);
 int			*make_tets(int	**at);
 int			**parse_tets(char *s);
 int			count_tets(char *s);
-void		solve_tetrimino(int	**p);
-int *parse_tetriminos(char *s);
+int			*parse_tetriminos(char *s);
+void		solve_tetrimino(int	*p, int len);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: rzarate <rzarate@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 02:48:46 by rzarate           #+#    #+#             */
-/*   Updated: 2018/02/25 03:50:06 by rzarate          ###   ########.fr       */
+/*   Updated: 2018/02/25 08:39:38 by rzarate          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,6 @@ void	fillit(char	*s)
 		return ;
 	}
 	p = parse_tetriminos(s);
+	solve_tetrimino(p, count_tets(s));
 	return ;
 }
