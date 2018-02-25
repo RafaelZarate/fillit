@@ -6,7 +6,7 @@
 /*   By: rzarate <rzarate@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/24 01:12:55 by rzarate           #+#    #+#             */
-/*   Updated: 2018/02/25 10:46:48 by rzarate          ###   ########.fr       */
+/*   Updated: 2018/02/25 12:46:12 by rzarate          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,67 +37,71 @@ int	values[20][3] = {{0, 0, 0}, {1, 2, 3}, {4, 8, 12}, {1, 4, 5}, {3, 4, 5}, \
 // 	return (map);
 // }
 
-static	t_tetri	create_tetri(int t)
-{
-	t_tetri tmp;
-	int		i;
-	int		max;
+// static	t_tetri	create_tetri(int t)
+// {
+// 	t_tetri tmp;
+// 	int		i;
+// 	int		max;
 
-	i = -1;
-	max = 0;
-	tmp = (t_tetri)ft_memalloc(sizeof(t_tetri));
-	tmp->tet = t;
-	while (++i < 3)
-		tmp->coords[i] = values[t][i];
-	i = -1;
-	while (++i < 3)
-		max = ((tmp->coords[i] > max) ? tmp->coords[i] : max);
-	tmp->max = max;
-	return (tmp);
-}
+// 	i = -1;
+// 	max = 0;
+// 	tmp = (t_tetri)ft_memalloc(sizeof(t_tetri));
+// 	tmp->tet = t;
+// 	while (++i < 3)
+// 		tmp->coords[i] = values[t][i];
+// 	i = -1;
+// 	while (++i < 3)
+// 		max = ((tmp->coords[i] > max) ? tmp->coords[i] : max);
+// 	tmp->max = max;
+// 	return (tmp);
+// }
 
-static	void	solve(t_tetri *tet, int win, int c, int i, int l)
+static	void	solve(int *p, int win, int c, int i, int l, char *s)
 {
 	char	*arr;
 	int x;
-
+	
+	printf("%d", c);
 	x = -1;
 	if (c == win)
 	{
 		printf("Daaaaaamn boiiiii");
 		return ;
 	}
-	if (!(arr = ft_strnew(l * l)))
+	arr = s;
+	s = ft_strnew(l * l);
+	if (arr[0])
+		arr = ft_strcpy(s, arr);
+	while (++x < (l * l) + 1)
+		arr[x] = '.';
+	while (++x < ((l * l) - values[p[i]][2]))
 	{
-		printf("fuck.");
-		return ;
-	}
-	while (++x < (l - tet[i]->max ))
-	{
-		if (arr[x] == '.' && arr[x + tet[i]->coords[0]] == '.' && arr[x + tet[i]->coords[1]] == '.' && arr[x + tet[i]->coords[2]] == '.')
+		if (arr[x] == '.' && arr[x + values[p[i]][0] + (l - 2)] == '.' && arr[x + values[p[i]][1] + (l - 2)] == '.' && arr[x + values[p[i]][2] + (l - 2)] == '.')
 		{
 			arr[x] = '#';
-			arr[x + tet[i]->coords[0]] = '#';
-			arr[x + tet[i]->coords[1]] = '#';
-			arr[x + tet[i]->coords[2]] == '#';
-			solve(tet, win, c++, i++, l);
+			arr[x + values[p[i]][0] + (l - 2)] = '#';
+			arr[x + values[p[i]][1] + (l - 2)] = '#';
+			arr[x + values[p[i]][2] + (l - 2)] = '#';
+			printf("%d", c);
+			solve(p, win, ++c, ++i, l, s);
 		}
 	}
-	solve(arr, win, c, 0, l++);
+	solve(p, win, c, 0, ++l, s);
 }
 
 void	solve_tetrimino(int	*p, int len)
 {
-	t_map	grid;
-	t_tetri	tetri[len];
-	int i;
+	char	*str = "....";
+	// t_map	grid;
+	// t_tetri	tetri[len];
+	// int i;
 
-	i = -1;
-	grid = create_map(len);
-	while (++i < len)
-	{
-		tetri[i] = create_tetri(p[i]);
-		printf("tet: %d, %d, %d, %d,max: %d\n", tetri[i]->tet, tetri[i]->coords[0], tetri[i]->coords[1], tetri[i]->coords[2], tetri[i]->max);
-	}
-	solve(tetri, len, 0, 0, 2);
+	// i = -1;
+	// grid = create_map(len);
+	// while (++i < len)
+	// {
+	// 	tetri[i] = create_tetri(p[i]);
+	// 	printf("tet: %d, %d, %d, %d,max: %d\n", tetri[i]->tet, tetri[i]->coords[0], tetri[i]->coords[1], tetri[i]->coords[2], tetri[i]->max);
+	// }
+	solve(p, len, 0, 0, 2, str);
 }
