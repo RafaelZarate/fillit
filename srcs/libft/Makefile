@@ -1,7 +1,7 @@
 
 NAME = libft.a
 
-FLAGS = -Wall -Werror -Wextra -c -g
+FLAGS = -Wall -Werror -Wextra -c
 
 SRC = *.c
 

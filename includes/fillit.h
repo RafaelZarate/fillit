@@ -6,7 +6,7 @@
 /*   By: rzarate <rzarate@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 01:48:59 by rzarate           #+#    #+#             */
-/*   Updated: 2018/02/26 09:40:05 by rzarate          ###   ########.fr       */
+/*   Updated: 2018/02/26 12:39:32 by rzarate          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,11 @@
 
 typedef	struct	s_tetri
 {
-	int	coords[3];
-	int	max;
-	int	tet;
-}				*t_tetri;
+	int	*tets;
+	int	*locations;
+	int	*max;
+	int	length;
+}				*t_tetris;
 
 typedef	struct	s_map
 {
