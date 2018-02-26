@@ -6,7 +6,7 @@
 /*   By: rzarate <rzarate@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/24 01:12:55 by rzarate           #+#    #+#             */
-/*   Updated: 2018/02/25 14:22:41 by rzarate          ###   ########.fr       */
+/*   Updated: 2018/02/26 09:57:05 by rzarate          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,25 +17,41 @@ int	values[20][3] = {{0, 0, 0}, {1, 2, 3}, {4, 8, 12}, {1, 4, 5}, {3, 4, 5}, \
 	{1, 4, 8}, {2, 3, 4}, {1, 5, 9}, {1, 2, 4}, {4, 8, 9}, {1, 3, 4}, \
 	{4, 5, 9}, {1, 5, 6}, {3, 4, 7}};
 
-// static	t_map	create_map(int len)
-// {
-// 	t_map	map;
-// 	int i;
-// 	int i2;
+static	t_map	create_map(int size, int *tets, int *coords)
+{
+	t_map	map;
+	int i;
+	int	i2;
+	int i3;
+	int	size,
 	
-// 	i = -1;
-// 	map = (t_map)ft_memalloc(sizeof(t_map));
-// 	map->size = 2 * len;
-// 	map->area = (char **)ft_memalloc(sizeof(char *) * (map->size));
-// 	while (++i < map->size)
-// 	{
-// 		i2 = -1;
-// 		map->area[i] = ft_strnew((map->size));
-// 		while (++i2 < map->size)
-// 			map->area[i][i2] = '.';
-// 	}
-// 	return (map);
-// }
+	i = -1;
+	i2 = 0;
+	map = (t_map)ft_memalloc(sizeof(t_map));
+	map->size = size;
+	map->area = ft_strnew(size * size);
+	ft_striter(map->area,set_to_dot);
+	if (!tets || !coords)
+	{
+		map->tets = NULL;
+		map->coords = NULL;
+		return (map);
+	}
+	while (++i < map->size)
+	{
+		if (i == coords[i2])
+		{
+			i3 = -1;
+			map->area[i] = i2 + 65;
+			while (++i3 < 3)
+			{
+				map->area[i + values[tets[i2]][i3]] = i2 + 65;
+			}
+			i2++;
+		}
+	}
+	return (map);
+}
 
 // static	t_tetri	create_tetri(int t)
 // {

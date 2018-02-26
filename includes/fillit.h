@@ -6,7 +6,7 @@
 /*   By: rzarate <rzarate@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 01:48:59 by rzarate           #+#    #+#             */
-/*   Updated: 2018/02/25 09:25:52 by rzarate          ###   ########.fr       */
+/*   Updated: 2018/02/26 09:40:05 by rzarate          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,10 @@ typedef	struct	s_tetri
 
 typedef	struct	s_map
 {
-	char		**area;
-	int			size;
+	char	*area;
+	int		size;
+	int		*tets;
+	int		*coords;
 }				*t_map;
 
 void			fillit(char	*s);
@@ -40,5 +42,6 @@ int			**parse_tets(char *s);
 int			count_tets(char *s);
 int			*parse_tetriminos(char *s);
 void		solve_tetrimino(int	*p, int len);
+void	set_to_dot(char c);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: rzarate <rzarate@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/24 11:56:33 by rzarate           #+#    #+#             */
-/*   Updated: 2018/02/25 08:35:12 by rzarate          ###   ########.fr       */
+/*   Updated: 2018/02/26 09:39:23 by rzarate          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,11 @@ int		count_tets(char *s)
 			c++;
 	}
 	return (c);
+}
+
+void	set_to_dot(char c)
+{
+	c = '.';
 }
 
 // int	access_values(int *ar, int i)
