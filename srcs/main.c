@@ -6,7 +6,7 @@
 /*   By: rzarate <rzarate@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 01:16:09 by rzarate           #+#    #+#             */
-/*   Updated: 2018/02/26 11:49:54 by rzarate          ###   ########.fr       */
+/*   Updated: 2018/02/26 15:50:54 by rzarate          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,12 @@ int	main(int ac,char  **av)
 	int	fd;
 	int	ret;
 	char	buf[BUF_SIZE + 1];
+	t_tetris tet;
 
+
+	// tet.length = 1;
 	av++;
+	ft_bzero(&tet, (sizeof(tet)));
 	if (ac == 1 || ac > 2)
 	{
 		ft_putendl_fd("you dumb piece of shittttt\n", 2);
@@ -34,7 +38,7 @@ int	main(int ac,char  **av)
 		}
 		ret = read(fd, buf, BUF_SIZE);
 		buf[ret] = '\0';
-		fillit(buf);
+		fillit(buf, &tet);
 		if (close(fd) == -1)
 		{
 			ft_putendl_fd("Couldn't close file\n", 2);

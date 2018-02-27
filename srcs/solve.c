@@ -6,7 +6,7 @@
 /*   By: rzarate <rzarate@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/24 01:12:55 by rzarate           #+#    #+#             */
-/*   Updated: 2018/02/26 12:39:43 by rzarate          ###   ########.fr       */
+/*   Updated: 2018/02/26 17:27:13 by rzarate          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,104 +26,108 @@ static	int	adjust_coords(int i, int s, int n)
 	return (c[i][n]);
 }
 
-static	t_map	create_map(int size, int *tets, int *coords)
+static	void	create_tetri(int *t, int *coords, int len, int s, t_tetris *tetris)
+{
+	int		i;
+
+	i = -1;
+	tetris->tets = (int *)ft_memalloc(sizeof(int) * len);
+	tetris->max = (int *)ft_memalloc(sizeof(int) * len);
+	tetris->coords = (int *)ft_memalloc(sizeof(int) * len);
+	tetris->len = len;
+	while (++i < len)
+	{
+		if (t[i])
+		{
+			tetris->max[i] = adjust_coords(t[i], s, 2);
+			tetris->tets[i] = t[i];
+		}
+		if (coords[i] >= 0)
+			tetris->coords[i] = coords[i];
+		else if (coords[i] == -1)
+			tetris->coords[i] = -1;
+	}
+}
+
+static	t_map	create_map(int size, t_tetris *tets)
 {
 	t_map	map;
 	int i;
-	int	i2;
 	int i3;
-	int	a_values[3];
+	int	c;
 	
 	i = -1;
-	i2 = 0;
+	c = 0;
 	map = (t_map)ft_memalloc(sizeof(t_map));
 	map->size = size;
 	map->area = ft_strnew(size * size);
 	while (++i < (size * size))
 		(map->area)[i] = '.';
-	if (!tets || !coords)
+	if (!tets->tets || !tets->coords)
 	{
 		map->tets = NULL;
 		map->coords = NULL;
 		return (map);
 	}
 	i = -1;
-	while (++i < (size * size))
+	while (++i < tets->len)
 	{
-		if (i == coords[i2])
+		if (tets->coords[i] != -1)
 		{
 			i3 = -1;
+			map->area[tets->coords[i]] = c + 65;
 			while (++i3 < 3)
-				a_values[i3] = adjust_coords(tets[i2], size, i3);
-			i3 = -1;
-			(map->area)[i] = i2 + 65;
-			while (++i3 < 3)
-				(map->area)[i + a_values[i3]] = i2 + 65;
-			i2++;
+				map->area[tets->coords[i] + adjust_coords(tets->tets[i], size, i3)] = c + 65;
+			c++;
 		}
 	}
 	return (map);
 }
 
-//Im gonna check first if create_map is working properly
-// static	void	solve(t_map grid, int win, int c, int *tetris)
-// {
-// 	int x;
-// 	int i;
-// 	char	*map;
-
-// 	if (c == win)
-// 	{
-// 		printf("Daaaaaamn boiiiii");
-// 		return ;
-// 	}
-// 	map = grid->area;
-// 	x = -1;
-// 	i = 0;
-// 	while (++x < ((grid->size * grid->size) - )
-// 	{
-		
-// 	}
-// 	solve(create_map(++(grid->size), ), win, c, 0, ++l, s);
-// }
-
-static	t_tetris	create_tetri(int *t)
+static	void	solve(t_map grid, int c, t_tetris *tetris)
 {
-	t_tetris tetris;
-	int		i;
-	int		max;
+	int x;
+	int i;
+	char	*map;
 
 	i = -1;
-	max = 0;
-	tetris = (t_tetris)ft_memalloc(sizeof(t_tetris));
-	tetris->tet = t;
-	while (++i < 3)
-		tmp->coords[i] = values[t][i];
-	i = -1;
-	while (++i < 3)
-		max = ((tmp->coords[i] > max) ? tmp->coords[i] : max);
-	tmp->max = max;
-	return (tmp);
+	map = grid->area;
+	if (c == tetris->len)
+	{
+		i = -1;
+		while (++i < grid->size * grid->size)
+		{
+			if (i % grid->size == 0 && i != 0)
+				ft_putchar('\n');
+		ft_putchar(grid->area[i]);
+		}
+		return ;
+	}
+	while (++i < tetris->len)
+	{
+		if (tetris->coords[i] == -1)
+		{
+			x = -1;
+			while (++x < ((grid->size * grid->size) - tetris->max[i]))
+			{
+				if (map[x] == '.' && map[x + adjust_coords(tetris->tets[i], grid->size, 0)] == '.' && map[x + adjust_coords(tetris->tets[i], grid->size, 1)] == '.' && map[x + adjust_coords(tetris->tets[i], grid->size, 2)] == '.')
+				{
+					tetris->coords[i] = x;
+					create_tetri(tetris->tets, tetris->coords, tetris->len, grid->size, tetris);
+					solve(create_map(grid->size, tetris), ++c, tetris);			
+				}
+			}
+		}
+	}
+	solve(create_map(++grid->size, tetris), 0, tetris);
 }
 
-void	solve_tetrimino(int	*p, int len)
+void	solve_tetrimino(int	*p, int len, t_tetris *tets)
 {
+	int c[3] = {-1, -1, -1};
 	t_map grid;
-	int arr[4] = {3, 2, 2, 3};
-	int pos[4] = {0, 2, 3, 8};
-	// t_map	grid;
-	// t_tetri	tetri[len];
-	// int i;
 
-	// i = -1;
-	// grid = create_map(len);
-	// while (++i < len)
-	// {
-	// 	tetri[i] = create_tetri(p[i]);
-	// 	printf("tet: %d, %d, %d, %d,max: %d\n", tetri[i]->tet, tetri[i]->coords[0], tetri[i]->coords[1], tetri[i]->coords[2], tetri[i]->max);
-	// }
-	grid = create_map(4, arr, pos);
-	len++;
-	p++;
-	printf("%s", grid->area);
+	create_tetri(p, c, len, 2, tets);
+	grid = create_map(5, tets);
+	solve(grid, 0, tets);
 }

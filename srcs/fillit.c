@@ -6,13 +6,13 @@
 /*   By: rzarate <rzarate@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 02:48:46 by rzarate           #+#    #+#             */
-/*   Updated: 2018/02/25 08:39:38 by rzarate          ###   ########.fr       */
+/*   Updated: 2018/02/26 15:42:15 by rzarate          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fillit.h"
 
-void	fillit(char	*s)
+void	fillit(char	*s, t_tetris *tet)
 {
 	int	*p;
 	int n;
@@ -31,6 +31,6 @@ void	fillit(char	*s)
 		return ;
 	}
 	p = parse_tetriminos(s);
-	solve_tetrimino(p, count_tets(s));
+	solve_tetrimino(p, count_tets(s), tet);
 	return ;
 }
