@@ -6,7 +6,7 @@
 /*   By: rzarate <rzarate@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/24 01:12:55 by rzarate           #+#    #+#             */
-/*   Updated: 2018/02/26 22:47:20 by rzarate          ###   ########.fr       */
+/*   Updated: 2018/02/27 01:38:19 by rzarate          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,25 +26,35 @@ static	int	adjust_coords(int i, int s, int n)
 	return (c[i][n]);
 }
 
+// TO CONTINUE TOMORROW, THIS FUNCTION WILL VERIFY
+// THE SIX POSSIBLE LOCATIONS POSSIBLES
+// static	int	verify_location(int i, int x)
+// {
+// 	if (i == 1 || ((i == 3 || i  == 11 || i == 13 || i == 16 || 1 == 18) && x == 0) || ((i == 6 || i == 10 || i == 14) && (x == 0 || x == 1)))
+// 		return (1);
+// 	else if ()
+// }
+
 static	int	check_valid_pos(int *a_values, int s, int x)
 {
-	if (((a_values[0] == s || a_values[0] == (2 * s) || a_values[0] == (3 * s)) \
-		|| ((a_values[0] < 4 && a_values[0] < s && ((a_values[0] + x) >= ((x + 1) + (s - ((x + 1) % s))))) \
-		|| (a_values[0] > 3 && a_values[0] < s && ((a_values[0] + x) >= ((x + 1) + (s - ((x + 1) % s))))) \
-		|| (((a_values[0] > s) && (a_values[0] > s * 2)) && ((a_values[0] + x) >= ((x + 1) + (s - ((x + 1) % s))))) \
-		|| ((a_values[0] > (2 * s) && a_values[0] < (3 * s)) && ((a_values[0] + x) >= ((x + 1) + (s - ((x + 1) % s))))))) \
-		&& ((a_values[1] == s || a_values[1] == (2 * s) || a_values[1] == (3 * s)) \
-		||(a_values[1] < 4 && a_values[1] < s && ((a_values[1] + x) >= ((x + 1) + (s - ((x + 1) % s))))) \
-		|| (a_values[1] > 3 && a_values[1] < s && ((a_values[1] + x) >= ((x + 1) + (s - ((x + 1) % s))))) \
-		|| (((a_values[1] > s) && (a_values[1] > s * 2)) && ((a_values[1] + x) >= ((x + 1) + (s - ((x + 1) % s))))) \
-		|| ((a_values[1] > (2 * s) && a_values[1] < (3 * s)) && ((a_values[1] + x) >= ((x + 1) + (s - ((x + 1) % s)))))) \
-		&& ((a_values[2] == s || a_values[2] == (2 * s) || a_values[2] == (3 * s)) \
-		|| (a_values[2] < 4 && a_values[2] < s && ((a_values[2] + x) >= ((x + 1) + (s - ((x + 1) % s))))) \
-		|| (a_values[2] > 3 && a_values[2] < s && ((a_values[2] + x) >= ((x + 1) + (s - ((x + 1) % s))))) \
-		|| (((a_values[2] > s) && (a_values[2] > s * 2)) && ((a_values[2] + x) >= ((x + 1) + (s - ((x + 1) % s))))) \
-		|| ((a_values[2] > (2 * s) && a_values[2] < (3 * s)) && ((a_values[2] + x) >= ((x + 1) + s - ((x + 1) % s))))))
-				return (1);
-	return (0);
+	int i;
+	int c;
+
+	i = -1;
+	c = 0;
+	while (++i)
+	{
+		if (((a_values[i] == s || a_values[i] == (2 * s) || a_values[i] == (3 * s)) \
+		|| (a_values[i] < s && ((a_values[i] + x) < ((x + 1) + (s - ((x + 1) % s))))) \
+		|| (a_values[i] > 3 && a_values[i] < s && ((a_values[i] + x) >= ((x + 1) + (s - ((x + 1) % s))))) \
+		|| (((a_values[i] > s) && (a_values[i] > s * 2)) && ((a_values[i] + x) >= ((x + 1) + (s - ((x + 1) % s))))) \
+		|| ((a_values[i] > (2 * s) && a_values[i] < (3 * s)) && ((a_values[i] + x) >= ((x + 1) + (s - ((x + 1) % s)))))))
+				c++;
+	}
+	if (c == 3)
+		return (1);
+	else
+		return (0);
 }
 
 static	void	create_tetri(int *t, int *coords, int len, int s, t_tetris *tetris)
