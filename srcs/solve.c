@@ -6,7 +6,7 @@
 /*   By: rzarate <rzarate@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/24 01:12:55 by rzarate           #+#    #+#             */
-/*   Updated: 2018/02/27 01:38:19 by rzarate          ###   ########.fr       */
+/*   Updated: 2018/02/27 15:02:12 by rzarate          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,28 +28,29 @@ static	int	adjust_coords(int i, int s, int n)
 
 // TO CONTINUE TOMORROW, THIS FUNCTION WILL VERIFY
 // THE SIX POSSIBLE LOCATIONS POSSIBLES
-// static	int	verify_location(int i, int x)
-// {
-// 	if (i == 1 || ((i == 3 || i  == 11 || i == 13 || i == 16 || 1 == 18) && x == 0) || ((i == 6 || i == 10 || i == 14) && (x == 0 || x == 1)))
-// 		return (1);
-// 	else if ()
-// }
-
-static	int	check_valid_pos(int *a_values, int s, int x)
+static	int	verify_location(int i, int p, int s)
 {
-	int i;
+	int x;
+	int r;
 	int c;
 
-	i = -1;
+	x = -1;
+	r = (p + 1) + (s - ((p + 1) % s));
 	c = 0;
-	while (++i)
+	while (++x < 3)
 	{
-		if (((a_values[i] == s || a_values[i] == (2 * s) || a_values[i] == (3 * s)) \
-		|| (a_values[i] < s && ((a_values[i] + x) < ((x + 1) + (s - ((x + 1) % s))))) \
-		|| (a_values[i] > 3 && a_values[i] < s && ((a_values[i] + x) >= ((x + 1) + (s - ((x + 1) % s))))) \
-		|| (((a_values[i] > s) && (a_values[i] > s * 2)) && ((a_values[i] + x) >= ((x + 1) + (s - ((x + 1) % s))))) \
-		|| ((a_values[i] > (2 * s) && a_values[i] < (3 * s)) && ((a_values[i] + x) >= ((x + 1) + (s - ((x + 1) % s)))))))
-				c++;
+		if (i == 2 || ((i == 5 || i == 8 || i == 9 || i == 15 || i == 17) && x == 0) || ((i == 3 || i == 4 || i == 7 || i == 11 || i == 15 || i == 19) && x == 1) || ((i == 5 || i == 7 || i == 9 || i == 11 || i == 12 || i == 14 || i == 16) && x == 2))
+			c++;
+		else if (i == 1 || ((i == 3 || i  == 11 || i == 13 || i == 16 || 1 == 18) && x == 0) || ((i == 6 || i == 10 || i == 14) && (x == 0 || x == 1)))
+			c += (r > (p + (adjust_coords(i, s, x))) ? 1 : 0);
+		else if (((i == 4 || i == 7 || i == 19 | i == 12) && x == 0) || ((i == 12 || i == 16) && x == 1))
+			c += ((r < (p + adjust_coords(i, s, x))) ? 1 : 0);
+		else if (((i == 5 || i == 8 || i == 13 || i == 17 || i == 18) && x == 1) || ((i == 3 || i == 4 || i == 6 || i == 8 || i == 10 || i == 18) && x == 2))
+			c += (((r * 2) > (p + adjust_coords(i, s, x))) ? 1 : 0);
+		else if ((i == 9 && x == 1) || (i == 19 && x == 2))
+			c += (((r * 2) < (p + adjust_coords(i, s, x))) ? 1 : 0);
+		else if ((i == 13 || i == 15 || i == 17) && x == 2)
+			c += (((r * 3) > (p + adjust_coords(i, s, x))) ? 1 : 0);
 	}
 	if (c == 3)
 		return (1);
@@ -225,18 +226,17 @@ static	void	solve(t_map grid, int c, t_tetris *tetris)
 			a_values[2] = adjust_coords(tetris->tets[i], grid->size, 2);
 			while (++x < ((grid->size * grid->size) - tetris->max[i]))
 			{
-				if (check_valid_pos(a_values, grid->size, x))
+				if (verify_location(tetris->tets[i], x, grid->size))
 				{				
 					if (map[x] == '.' && map[x + a_values[0]] == '.' && map[x + a_values[1]] == '.' && map[x + a_values[2]] == '.')
 					{
 						tetris->coords[i] = x;
 						map[x] = 65 + c;
-						map[x + a_values[0]] = 65 + c;
-						map[x + a_values[1]] = 65 + c;
-						map[x + a_values[2]] = 65 + c;
+						map[x + a_values[0]] = 65 + i;
+						map[x + a_values[1]] = 65 + i;
+						map[x + a_values[2]] = 65 + i;
 						c++;
 						p++;
-						create_tetri(tetris->tets, tetris->coords, tetris->len, grid->size, tetris);
 						break ;
 					}
 				}

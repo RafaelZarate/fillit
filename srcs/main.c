@@ -6,7 +6,7 @@
 /*   By: rzarate <rzarate@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 01:16:09 by rzarate           #+#    #+#             */
-/*   Updated: 2018/02/26 15:50:54 by rzarate          ###   ########.fr       */
+/*   Updated: 2018/02/27 14:35:33 by rzarate          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	main(int ac,char  **av)
 	}
 	else if (ac == 2)
 	{
-		fd = open("test.txt", O_RDONLY);
+		fd = open("test2.txt", O_RDONLY);
 		if (fd == -1)
 		{
 			ft_putendl_fd("Couldn't open file\n", 2);
