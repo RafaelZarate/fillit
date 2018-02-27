@@ -6,7 +6,7 @@
 /*   By: rzarate <rzarate@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/24 01:12:55 by rzarate           #+#    #+#             */
-/*   Updated: 2018/02/26 17:27:13 by rzarate          ###   ########.fr       */
+/*   Updated: 2018/02/26 18:01:12 by rzarate          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,11 +95,11 @@ static	void	solve(t_map grid, int c, t_tetris *tetris)
 	if (c == tetris->len)
 	{
 		i = -1;
-		while (++i < grid->size * grid->size)
+		while (++i < (grid->size * grid->size))
 		{
 			if (i % grid->size == 0 && i != 0)
 				ft_putchar('\n');
-		ft_putchar(grid->area[i]);
+			ft_putchar(grid->area[i]);
 		}
 		return ;
 	}
@@ -119,15 +119,20 @@ static	void	solve(t_map grid, int c, t_tetris *tetris)
 			}
 		}
 	}
-	solve(create_map(++grid->size, tetris), 0, tetris);
+	solve(create_map(grid->size + 1, tetris), 0, tetris);
 }
 
 void	solve_tetrimino(int	*p, int len, t_tetris *tets)
 {
-	int c[3] = {-1, -1, -1};
+	int *c;
+	int i;
 	t_map grid;
 
-	create_tetri(p, c, len, 2, tets);
-	grid = create_map(5, tets);
+	c = (int *)ft_memalloc(sizeof(int) * len);
+	i = -1;
+	while (++i < len)
+		c[i] = -1;
+	create_tetri(p, c, len, *c, tets);
+	grid = create_map(3, tets);
 	solve(grid, 0, tets);
 }
