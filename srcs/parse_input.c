@@ -6,7 +6,7 @@
 /*   By: rzarate <rzarate@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 05:24:40 by rzarate           #+#    #+#             */
-/*   Updated: 2018/02/25 08:57:54 by rzarate          ###   ########.fr       */
+/*   Updated: 2018/02/27 20:26:54 by rzarate          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,7 @@ int *parse_tetriminos(char *s)
 	r = create_tets(parse_tets(s), n);
 	if (!r)
 	{
-		ft_putendl_fd("Couldn't parse tetriminos", 2);
+		ft_putstr("error");
 		return (0);
 	}
 	return (r);

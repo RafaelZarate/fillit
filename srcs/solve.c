@@ -6,7 +6,7 @@
 /*   By: rzarate <rzarate@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/24 01:12:55 by rzarate           #+#    #+#             */
-/*   Updated: 2018/02/27 17:46:12 by rzarate          ###   ########.fr       */
+/*   Updated: 2018/02/28 00:03:49 by rzarate          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static	int	verify_location(int i, int p, int s)
 	{
 		if (i == 2 || ((i == 5 || i == 8 || i == 9 || i == 15 || i == 17) && x == 0) || ((i == 3 || i == 4 || i == 7 || i == 11 || i == 15 || i == 19) && x == 1) || ((i == 5 || i == 7 || i == 9 || i == 11 || i == 12 || i == 14 || i == 16) && x == 2))
 			c++;
-		else if (i == 1 || ((i == 3 || i  == 11 || i == 13 || i == 16 || 1 == 18) && x == 0) || ((i == 6 || i == 10 || i == 14) && (x == 0 || x == 1)))
+		else if (i == 1 || ((i == 3 || i  == 11 || i == 13 || i == 16 || i == 18) && x == 0) || ((i == 6 || i == 10 || i == 14) && (x == 0 || x == 1)))
 		{
 			if ((p + 1) % s == 0)
 				c += 0;
@@ -49,13 +49,23 @@ static	int	verify_location(int i, int p, int s)
 				c += (r > (p + (adjust_coords(i, s, x))) ? 1 : 0);
 		}
 		else if (((i == 4 || i == 7 || i == 19 | i == 12) && x == 0) || ((i == 12 || i == 16) && x == 1))
-			c += ((r < (p + adjust_coords(i, s, x))) ? 1 : 0);
+			c += ((r <= (p + adjust_coords(i, s, x))) ? 1 : 0);
 		else if (((i == 5 || i == 8 || i == 13 || i == 17 || i == 18) && x == 1) || ((i == 3 || i == 4 || i == 6 || i == 8 || i == 10 || i == 18) && x == 2))
-			c += (((r * 2) > (p + adjust_coords(i, s, x))) ? 1 : 0);
+		{
+			if ((p + 1) % s == 0)
+				c += 0;
+			else
+				c += (((r * 2) > (p + adjust_coords(i, s, x))) ? 1 : 0);
+		}
 		else if ((i == 9 && x == 1) || (i == 19 && x == 2))
-			c += (((r * 2) < (p + adjust_coords(i, s, x))) ? 1 : 0);
+			c += (((r * 2) <= (p + adjust_coords(i, s, x))) ? 1 : 0);
 		else if ((i == 13 || i == 15 || i == 17) && x == 2)
-			c += (((r * 3) > (p + adjust_coords(i, s, x))) ? 1 : 0);
+		{
+			if ((p + 1) % s == 0)
+				c += 0;
+			else
+				c += (((r * 3) > (p + adjust_coords(i, s, x))) ? 1 : 0);
+		}
 	}
 	if (c == 3)
 		return (1);
@@ -121,72 +131,6 @@ static	t_map	create_map(int size, t_tetris *tets)
 	return (map);
  }
 
-// static	void	solve(t_map grid, int c, t_tetris *tetris)
-// {
-// 	int x;
-// 	int i;
-// 	char	*map;
-// 	ft_putstr("C ");ft_putnbr(c);
-// 	ft_putchar('\t');
-// 	ft_putstr("t->l ");ft_putnbr(tetris->len);
-// 	ft_putchar('\t');
-// 	ft_putstr("m->size ");ft_putnbr(grid->size);
-// 	ft_putchar('\n');
-// 	int p = 0;
-// 	int	a_values[3];
-// 	map = grid->area;
-// 	i = -1;
-// 	while (++i < (grid->size * grid->size))
-// 	{
-// 		if (i % grid->size == 0 && i != 0)
-// 			ft_putchar('\n');
-// 		ft_putchar(grid->area[i]);
-// 	}
-// 	ft_putchar('\n');ft_putchar('\n');
-// 	if (c == tetris->len)
-// 	{
-// 		i = -1;
-// 		while (++i < (grid->size * grid->size))
-// 		{
-// 			if (i % grid->size == 0 && i != 0)
-// 				ft_putchar('\n');
-// 			ft_putchar(grid->area[i]);
-// 		}
-// 		return ;
-// 	}
-// 	i = -1;
-// 	while (++i < tetris->len)
-// 	{
-// 		if (tetris->coords[i] == -1)
-// 		{
-// 			x = -1;
-// 			a_values[0] = adjust_coords(tetris->tets[i], grid->size, 0);
-// 			a_values[1] = adjust_coords(tetris->tets[i], grid->size, 1);
-// 			a_values[2] = adjust_coords(tetris->tets[i], grid->size, 2);
-// 			while (++x < ((grid->size * grid->size) - tetris->max[i]))
-// 			{
-
-// 					if (map[x] == '.' && map[x + a_values[0]] == '.' && map[x + a_values[1]] == '.' && map[x + a_values[2]] == '.')
-// 					{
-// 						tetris->coords[i] = x;
-// 						map[x] = 65 + c;
-// 						map[x + a_values[0]] = 65 + c;
-// 						map[x + a_values[1]] = 65 + c;
-// 						map[x + a_values[2]] = 65 + c;
-// 						c++;
-// 						p++;
-// 						create_tetri(tetris->tets, tetris->coords, tetris->len, grid->size, tetris);
-// 						break ;
-// 					}
-// 			}
-// 		}
-// 	}
-// 	if (p > 0)
-// 		solve(create_map((grid->size), tetris), c, tetris);	
-// 	else
-// 		solve(create_map((grid->size + 1), tetris), c, tetris);
-// }
-
 static	void	solve(t_map grid, int c, t_tetris *tetris)
 {
 	int x;
@@ -235,14 +179,14 @@ static	void	solve(t_map grid, int c, t_tetris *tetris)
 			}
 		}
 	}
-	if (p > 0)
+	if (p == tetris->len)
 		solve(create_map((grid->size), tetris), c, tetris);	
 	else
 	{
 		i = -1;
 		while (++i < tetris->len)
-			tetris->coords[i] += tetris->coords[i] / grid->size;
-		solve(create_map((grid->size + 1), tetris), c, tetris);
+			tetris->coords[i] = -1;
+		solve(create_map((grid->size + 1), tetris), 0, tetris);
 	}
 }
 

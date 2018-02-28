@@ -6,7 +6,7 @@
 /*   By: rzarate <rzarate@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 03:55:46 by rzarate           #+#    #+#             */
-/*   Updated: 2018/02/25 03:48:56 by rzarate          ###   ########.fr       */
+/*   Updated: 2018/02/27 20:29:43 by rzarate          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,15 +76,19 @@ int	check_input(char *s)
 {
 	size_t	i;
 	int		**a;
+	size_t	len;
 
+	len = ft_strlen(s);
 	i = 0;
 	if (!s[i])
 		return (-1);
+	if (s[len -1] == '\n' && s[len - 2] == '\n')
+		return (0);
 	else if (check_chars(s) && check_nl(s))
 	{
 		a = parse_tets(s);
-		if (!check_pounds(a, s))
-			return (0);
+		if (check_pounds(a, s))
+			return (1);
 	}
-	return (1);
+	return (0);
 }
