@@ -6,13 +6,13 @@
 /*   By: rzarate <rzarate@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 05:24:40 by rzarate           #+#    #+#             */
-/*   Updated: 2018/02/27 20:26:54 by rzarate          ###   ########.fr       */
+/*   Updated: 2018/03/01 00:46:27 by rzarate          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fillit.h"
 
-static	int	set_tet_1(int	*p, int i)
+static	int	set_tet_1(int *p, int i)
 {
 	if (i < 4 && p[i + 4] && p[i + 8] && p[i + 12])
 		return (2);
@@ -41,7 +41,7 @@ static	int	set_tet_1(int	*p, int i)
 	return (0);
 }
 
-static	int	set_tet_2(int	*p, int i)
+static	int	set_tet_2(int *p, int i)
 {
 	if (i < 11 && p[i + 3] && p[i + 4] && p[i + 5])
 		return (4);
@@ -77,8 +77,7 @@ static	int	*create_tets(int **aa, int n)
 		{
 			if (aa[x][y] == 1)
 			{
-				a[i] = set_tet_1(aa[x], y);
-				if (!a[i])
+				if (!(a[i] = set_tet_1(aa[x], y)))
 					a[i] = set_tet_2(aa[x], y);
 				if (!a[i])
 					return (NULL);
@@ -90,9 +89,9 @@ static	int	*create_tets(int **aa, int n)
 	return (a);
 }
 
-int	**parse_tets(char *s)
+int			**parse_tets(char *s)
 {
-	int	**a;
+	int		**a;
 	int		i;
 	int		i2;
 	int		x;
@@ -110,10 +109,7 @@ int	**parse_tets(char *s)
 		{
 			if (s[x] != '\n')
 			{
-				if (s[x] == '#')
-					a[i][i2] = 1;
-				else if (s[x] == '.')
-					a[i][i2] = 0;
+				a[i][i2] = ((s[x] == '.') ? 0 : 1);
 				i2++;
 			}
 		}
@@ -121,11 +117,11 @@ int	**parse_tets(char *s)
 	return (a);
 }
 
-int *parse_tetriminos(char *s)
+int			*parse_tetriminos(char *s)
 {
 	int	*r;
 	int	n;
-	
+
 	n = count_tets(s);
 	r = create_tets(parse_tets(s), n);
 	if (!r)

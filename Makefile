@@ -2,7 +2,6 @@
 NAME = fillit
 
 SRC = main.c \
-		fillit.c \
 		validate_input.c \
 		parse_input.c \
 		solve.c \

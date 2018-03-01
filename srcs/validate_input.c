@@ -6,19 +6,17 @@
 /*   By: rzarate <rzarate@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 03:55:46 by rzarate           #+#    #+#             */
-/*   Updated: 2018/02/27 20:29:43 by rzarate          ###   ########.fr       */
+/*   Updated: 2018/03/01 00:33:02 by rzarate          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fillit.h"
 
-// extern int g_o[3][19]
-
-static	int	check_pounds(int **p, char	*s)
+static	int	check_pounds(int **p, char *s)
 {
-	int i;
-	int	i2;
-	int	sum;
+	int		i;
+	int		i2;
+	int		sum;
 
 	i = -1;
 	while (++i < count_tets(s))
@@ -35,7 +33,7 @@ static	int	check_pounds(int **p, char	*s)
 
 static	int	check_chars(char *s)
 {
-	int i;
+	int		i;
 
 	i = 0;
 	while (s[i])
@@ -47,17 +45,17 @@ static	int	check_chars(char *s)
 	return (1);
 }
 
- static	int	check_nl(char *s)
- {
- 	int i;
-	int	c;
+static	int	check_nl(char *s)
+{
+	int		i;
+	int		c;
 
- 	i = 0;
+	i = 0;
 	c = 0;
- 	while (s[i])
- 	{
- 		if (((i - c + 1) % 5 == 0) && s[i] != '\n' && i != 0)
-		 	return (0);
+	while (s[i])
+	{
+		if (((i - c + 1) % 5 == 0) && s[i] != '\n' && i != 0)
+			return (0);
 		else if (((i - c) % 20 == 0) && s[i] != '\n' && i != 0)
 			return (0);
 		if ((i - c) % 20 == 0 && i != 0)
@@ -65,14 +63,14 @@ static	int	check_chars(char *s)
 			c++;
 			i++;
 			if (s[i] == '\n')
-		 		return (0);
+				return (0);
 		}
- 		i++;		
- 	}
+		i++;
+	}
 	return (1);
 }
 
-int	check_input(char *s)
+int			check_input(char *s)
 {
 	size_t	i;
 	int		**a;
@@ -82,7 +80,7 @@ int	check_input(char *s)
 	i = 0;
 	if (!s[i])
 		return (-1);
-	if (s[len -1] == '\n' && s[len - 2] == '\n')
+	if (s[len - 1] == '\n' && s[len - 2] == '\n')
 		return (0);
 	else if (check_chars(s) && check_nl(s))
 	{
