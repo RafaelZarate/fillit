@@ -6,7 +6,7 @@
 /*   By: rzarate <rzarate@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/24 01:12:55 by rzarate           #+#    #+#             */
-/*   Updated: 2018/02/28 20:17:04 by rzarate          ###   ########.fr       */
+/*   Updated: 2018/03/01 00:09:59 by rzarate          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,22 +51,32 @@ static	int	verify_location(int i, int p, int s, t_master *mst)
 					c += (r > (p + (adjust_coords(i, s, x))) ? 1 : 0);
 			}
 			else if (((i == 4 || i == 7 || i == 19 | i == 12) && x == 0) || ((i == 12 || i == 16) && x == 1))
-				c += ((r <= (p + adjust_coords(i, s, x))) ? 1 : 0);
+			{
+				if ((p + 1) % s == 0)
+					c += (((r - s) <= (p + adjust_coords(i, s, x))) ? 1 : 0);
+				else
+					c += ((r <= (p + adjust_coords(i, s, x))) ? 1 : 0);
+			}
 			else if (((i == 5 || i == 8 || i == 13 || i == 17 || i == 18) && x == 1) || ((i == 3 || i == 4 || i == 6 || i == 8 || i == 10 || i == 18) && x == 2))
 			{
 				if ((p + 1) % s == 0)
 					c += 0;
 				else
-					c += (((r * 2) > (p + adjust_coords(i, s, x))) ? 1 : 0);
+					c += (((r + s) > (p + adjust_coords(i, s, x))) ? 1 : 0);
 			}
 			else if ((i == 9 && x == 1) || (i == 19 && x == 2))
-				c += (((r * 2) <= (p + adjust_coords(i, s, x))) ? 1 : 0);
+			{
+				if ((p + 1) % s == 0)
+					c += (((r + s) >= (p + adjust_coords(i, s, x))) ? 1 : 0);
+				else
+					c += (((r + s) <= (p + adjust_coords(i, s, x))) ? 1 : 0);
+			}
 			else if ((i == 13 || i == 15 || i == 17) && x == 2)
 			{
 				if ((p + 1) % s == 0)
 					c += 0;
 				else
-					c += (((r * 3) > (p + adjust_coords(i, s, x))) ? 1 : 0);
+					c += (((r + (2 * s)) > (p + adjust_coords(i, s, x))) ? 1 : 0);
 			}
 		}
 	}
@@ -114,7 +124,6 @@ static	void	create_map(int size, t_master *mst)
 	mst->area = ft_strnew(mst->len + 1);
 	while (++i < mst->len)
 		mst->area[i] = '.';
-	// ft_memset(mst->area, '.', mst->len);
 	if (!mst->tets || !mst->coords)
 	{
 		mst->tets = NULL;
@@ -150,19 +159,20 @@ static	int	solve(t_master *mst, int i)
 		if (verify_location(mst->tets[i], x, mst->size, mst))
 		{
 	// ft_putnbr(i);
+			mst->coords[i] = x;
 			mst->area[x] = 65 + i;
 			mst->area[x + a_values[0]] = 65 + i;
 			mst->area[x + a_values[1]] = 65 + i;
 			mst->area[x + a_values[2]] = 65 + i;
-			if (solve(mst, ++i) != 0)
+			if (solve(mst, i + 1) != 0)
 				return (1);
-			// else
-			// {
-			// 	mst->area[x] = '.';
-			// 	mst->area[x + a_values[0]] = '.';
-			// 	mst->area[x + a_values[1]] = '.';
-			// 	mst->area[x + a_values[2]] = '.';
-			// }
+			else
+			{
+				mst->area[x] = '.';
+				mst->area[x + a_values[0]] = '.';
+				mst->area[x + a_values[1]] = '.';
+				mst->area[x + a_values[2]] = '.';
+			}
 		}
 	}
 	return (0);
@@ -181,7 +191,7 @@ void	solve_tetrimino(int	*p, int n, t_master *mst)
 	while (++i < n)
 		coords[i] = -1;
 	final = 0;
-	while (final == 0)
+	while (!final)
 	{
 		s++;
 		create_tetri(p, coords, n, s, mst);
