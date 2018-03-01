@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utilities2.c                                       :+:      :+:    :+:   */
+/*   utilities_2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rzarate <rzarate@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/01 03:40:09 by rzarate           #+#    #+#             */
-/*   Updated: 2018/03/01 04:16:55 by rzarate          ###   ########.fr       */
+/*   Updated: 2018/03/01 05:54:13 by rzarate          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fillit.h"
+#include "includes/fillit.h"
 
 static	int	check_ix1(int i, int x, int p, int s)
 {
@@ -91,4 +91,21 @@ int			verify_location(int i, int p, int s, t_master *mst)
 			return (1);
 	}
 	return (0);
+}
+
+void		print_error(int n)
+{
+	if (n == 1)
+		ft_putstr("usage: ./fillit [target_file]");
+	else if (n == 2)
+		ft_putstr("error");
+	else if (n == 3)
+		ft_putstr("error");
+	else if (n == 4)
+		ft_putstr("error");
+	else if (n == 5)
+		ft_putstr("error");
+	else if (n == 6)
+		ft_putstr("error");
+	exit(n);
 }

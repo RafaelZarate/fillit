@@ -1,40 +1,37 @@
-
+MAKE = make -C
 NAME = fillit
+LIB = libft/
+CFLAGS = -Wall -Wextra -Werror
+CC = gcc
 
-SRC = main.c \
-		validate_input.c \
-		parse_input.c \
-		solve.c \
-		utility_functs.c \
-		utilities2.c
+#When compiling. you need to add your .a lib
+CFILES = $(LIB)/libft.a \
+		 main.c \
+         validate_input.c \
+		 parse_input.c \
+		 solve.c \
+		 utilities_1.c \
+         utilities_2.c 
 
-OBJ = $(SRC:.c=.o)
-
-SRC_PATH = srcs/
-
-SRC_POS = $(addprefix $(SRC_PATH), $(SRC))
-
-FLAGS = -Wall -Werror -Wextra
-
-LIBFT = srcs/libft/libft.a
+#These options are here in case the lib needs to be recompiled.
+#LIBM, LIBC, LIBF will run rules re, clean and fclean inside the libft folder
+LIBM = $(MAKE) $(LIB) re
+LIBC = $(MAKE) $(LIB) clean
+LIBF = $(MAKE) $(LIB) fclean
+OBJECTS = $(CFILES:.c=.o)
 
 all: $(NAME)
 
-$(NAME): $(LIBFT) $(OBJ)
-				gcc $(FLAGS) $(OBJ) -o $(NAME) $(LIBFT)
-
-$(OBJ): $(LIBFT)
-				gcc $(FLAGS) -c $(SRC_POS)
-
-$(LIBFT):
-				make -C ./srcs/libft
+$(NAME):
+	@$(LIBM)
+	@$(CC) $(CFLAGS) -I. -o $(NAME) $(CFILES)
 
 clean:
-				rm -f $(OBJ)
-					make clean -C ./srcs/libft
+	@$(LIBC)
+	@/bin/rm -f $(OBJECTS) fillit.o
 
-fclean: clean
-				rm -f $(NAME)
-					make fclean -C ./srcs/libft
+fclean:
+	@$(LIBF)
+	@/bin/rm -f $(OBJECTS) $(NAME)
 
 re: fclean all

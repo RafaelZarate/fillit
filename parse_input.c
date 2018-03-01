@@ -6,11 +6,11 @@
 /*   By: rzarate <rzarate@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 05:24:40 by rzarate           #+#    #+#             */
-/*   Updated: 2018/03/01 00:46:27 by rzarate          ###   ########.fr       */
+/*   Updated: 2018/03/01 05:38:12 by rzarate          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fillit.h"
+#include "includes/fillit.h"
 
 static	int	set_tet_1(int *p, int i)
 {
@@ -126,7 +126,7 @@ int			*parse_tetriminos(char *s)
 	r = create_tets(parse_tets(s), n);
 	if (!r)
 	{
-		ft_putstr("error");
+		print_error(6);
 		return (0);
 	}
 	return (r);

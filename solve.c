@@ -6,11 +6,11 @@
 /*   By: rzarate <rzarate@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/24 01:12:55 by rzarate           #+#    #+#             */
-/*   Updated: 2018/03/01 03:35:12 by rzarate          ###   ########.fr       */
+/*   Updated: 2018/03/01 05:13:37 by rzarate          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fillit.h"
+#include "includes/fillit.h"
 
 static	void	create_tetri(int *t, int *coords, int len, t_master *mst)
 {

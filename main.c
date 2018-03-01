@@ -6,11 +6,11 @@
 /*   By: rzarate <rzarate@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 01:16:09 by rzarate           #+#    #+#             */
-/*   Updated: 2018/03/01 02:05:25 by rzarate          ###   ########.fr       */
+/*   Updated: 2018/03/01 05:33:09 by rzarate          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fillit.h"
+#include "includes/fillit.h"
 
 void	fillit(char *s, t_master *mst)
 {
@@ -22,12 +22,12 @@ void	fillit(char *s, t_master *mst)
 	n = check_input(s);
 	if (n == -1)
 	{
-		ft_putstr("error");
+		print_error(4);
 		return ;
 	}
 	else if (n == 0)
 	{
-		ft_putstr("error");
+		print_error(5);
 		return ;
 	}
 	p = parse_tetriminos(s);
@@ -43,19 +43,19 @@ int		main(int ac, char **av)
 	t_master	mst;
 
 	if (ac == 1 || ac > 2)
-		ft_putstr("error");
+		print_error(1);
 	else if (ac == 2)
 	{
 		if ((fd = open(av[1], O_RDONLY)) == -1)
 		{
-			ft_putendl("error");
+			print_error(2);
 			return (0);
 		}
 		ret = read(fd, buf, BUF_SIZE);
 		buf[ret] = '\0';
 		fillit(buf, &mst);
 		if (close(fd) == -1)
-			ft_putendl("error");
+			print_error(3);
 	}
 	return (0);
 }

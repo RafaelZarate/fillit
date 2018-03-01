@@ -6,14 +6,14 @@
 /*   By: rzarate <rzarate@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 01:48:59 by rzarate           #+#    #+#             */
-/*   Updated: 2018/03/01 04:24:37 by rzarate          ###   ########.fr       */
+/*   Updated: 2018/03/01 05:27:48 by rzarate          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FILLIT_H
 # define FILLIT_H
 
-# include "../srcs/libft/libft.h"
+# include "../libft/libft.h"
 # include <fcntl.h>
 # include <sys/types.h>
 # include <sys/uio.h>
@@ -31,6 +31,7 @@ typedef struct	s_master
 	int			n;
 }				t_master;
 
+void			print_error(int n);
 void			fillit(char	*s, t_master *mst);
 int				check_input(char *s);
 int				*make_tets(int	**at);
