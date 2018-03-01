@@ -5,7 +5,8 @@ SRC = main.c \
 		validate_input.c \
 		parse_input.c \
 		solve.c \
-		utility_functs.c
+		utility_functs.c \
+		utilities2.c
 
 OBJ = $(SRC:.c=.o)
 
