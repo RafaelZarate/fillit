@@ -6,7 +6,7 @@
 /*   By: rzarate <rzarate@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 01:16:09 by rzarate           #+#    #+#             */
-/*   Updated: 2018/02/27 20:26:14 by rzarate          ###   ########.fr       */
+/*   Updated: 2018/02/28 02:49:56 by rzarate          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ int	main(int ac,char  **av)
 	int	fd;
 	int	ret;
 	char	buf[BUF_SIZE + 1];
-	t_tetris tet;
+	t_master mst;
 
 
-	ft_bzero(&tet, (sizeof(tet)));
+	ft_bzero(&mst, (sizeof(mst)));
 	if (ac == 1 || ac > 2)
 	{
 		ft_putstr("error");
@@ -36,7 +36,7 @@ int	main(int ac,char  **av)
 		}
 		ret = read(fd, buf, BUF_SIZE);
 		buf[ret] = '\0';
-		fillit(buf, &tet);
+		fillit(buf, &mst);
 		if (close(fd) == -1)
 		{
 			ft_putendl("error");
