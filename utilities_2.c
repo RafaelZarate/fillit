@@ -6,7 +6,7 @@
 /*   By: rzarate <rzarate@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/01 03:40:09 by rzarate           #+#    #+#             */
-/*   Updated: 2018/03/03 20:18:43 by rzarate          ###   ########.fr       */
+/*   Updated: 2018/03/07 00:22:11 by rzarate          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,5 +107,6 @@ void		print_error(int n)
 		ft_putstr("error");
 	else if (n == 6)
 		ft_putstr("error");
+	ft_putchar('\n');
 	exit(n);
 }

@@ -6,7 +6,7 @@
 /*   By: rzarate <rzarate@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 01:16:09 by rzarate           #+#    #+#             */
-/*   Updated: 2018/03/03 20:17:21 by rzarate          ###   ########.fr       */
+/*   Updated: 2018/03/07 00:17:59 by rzarate          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,6 @@ int		main(int ac, char **av)
 		if (close(fd) == -1)
 			print_error(3);
 	}
+	ft_putchar('\n');
 	return (0);
 }
